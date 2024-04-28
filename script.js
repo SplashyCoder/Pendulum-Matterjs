@@ -12,12 +12,34 @@ function ajustarTamañoH(){
     return panelIzquierda.clientHeight
 }
 
-//saving it in variables
 const canvasWidth = ajustarTamañoW()
-console.log(canvasWidth);
-
 const canvasHeight = ajustarTamañoH()
-console.log(canvasHeight);
+
+const canvasWidthPendulum1 = canvasWidth/2
+
+
+function anguloCartesiano (anguloEnGrados) {
+// Convertir a radianes
+const anguloEnRadianes = anguloEnGrados * Math.PI / 180;
+
+// Coordenadas cartesianas del péndulo
+const x = canvasWidth/3 * Math.sin(anguloEnRadianes); // Posición horizontal
+const y = 10; // Posición vertical
+// const y = 10
+
+let coordenadas = [x,y]
+
+
+
+return(coordenadas);
+}
+
+let coordenadas = anguloCartesiano(110)
+console.log(coordenadas)
+
+
+//saving it in variables
+
 
 //Creating the const for Matter js
 const Engine = Matter.Engine,
@@ -34,15 +56,19 @@ const iRender = Render.create({
   engine: iEngine,
   options: {
     width: 800,
-    height: 400,
+    height: 800,
     wireframes: false
   }
 });
 
 //Creating the bodies and the ground
-const pendulum1 = Bodies.circle(300, 100, 50, 10);
-const pendulum2 = Bodies.circle(400, 100, 50, 10);
-const ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true });
+const pendulum1 = Bodies.circle(coordenadas[0], coordenadas[0], 50, 10);
+// const pendulum1 = Bodies.circle(50, 0, 50, 10);
+
+// const pendulum2 = Bodies.circle(coordenadas[0]+canvasWidth * 2/3, coordenadas[0], 50, 10);
+const pendulum2 = Bodies.circle(coordenadas[0], coordenadas[0], 50, 10);
+
+// const ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true });
 
 
 //Adding the two bodies to the world
@@ -54,12 +80,32 @@ const constraint = Matter.Constraint.create({
     bodyB: pendulum2,
     pointA: { x: 49, y: 0 },
     pointB: { x:-49, y: 0 },
-    length: 150, // Longitud de la cuerda
-    stiffness: 0.7 // Rigidez de la cuerda
+    length: 200, // Longitud de la cuerda
+    stiffness: 0.01 // Rigidez de la cuerda
 });
 
+//Creating costraints 1 & 2 for makin the pendulums
+const constraint2 = Matter.Constraint.create({
+  pointA: { x: canvasWidth/3, y: 0},
+  bodyB: pendulum1,
+  stiffness: 0.9,
+  render: {
+      strokeStyle: "#4a485b"
+  }
+})
+
+const constraint3 = Matter.Constraint.create({
+  pointA: { x: canvasWidth * 2/3, y: 0 },
+  bodyB: pendulum2,
+  stiffness: 0.9,
+  render: {
+      strokeStyle: "#4a485b"
+  }
+})
 //Adding constraint and ground to the wold
-Composite.add(iEngine.world, [constraint,ground]);
+// Composite.add(iEngine.world, [constraint2]);
+Composite.add(iEngine.world, [constraint, constraint2, constraint3]);
+
 
 //Redering everithing
 Render.run(iRender);
