@@ -28,13 +28,10 @@ const y = 10; // Posición vertical
 // const y = 10
 
 let coordenadas = [x,y]
-
-
-
 return(coordenadas);
 }
 
-let coordenadas = anguloCartesiano(110)
+let coordenadas = anguloCartesiano(45)
 console.log(coordenadas)
 
 
@@ -55,8 +52,7 @@ const iRender = Render.create({
   element: document.body,
   engine: iEngine,
   options: {
-    width: 800,
-    height: 800,
+
     wireframes: false
   }
 });
@@ -66,7 +62,7 @@ const pendulum1 = Bodies.circle(coordenadas[0], coordenadas[0], 50, 10);
 // const pendulum1 = Bodies.circle(50, 0, 50, 10);
 
 // const pendulum2 = Bodies.circle(coordenadas[0]+canvasWidth * 2/3, coordenadas[0], 50, 10);
-const pendulum2 = Bodies.circle(coordenadas[0], coordenadas[0], 50, 10);
+const pendulum2 = Bodies.circle(canvasWidth - coordenadas[0], coordenadas[0], 50, 10);
 
 // const ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true });
 
