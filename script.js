@@ -58,11 +58,11 @@ const iRender = Render.create({
 });
 
 //Creating the bodies and the ground
-const pendulum1 = Bodies.circle(coordenadas[0], coordenadas[0], 50, 10);
+const pendulum1 = Bodies.circle(coordenadas[0], coordenadas[0], canvasWidth/20, 10);
 // const pendulum1 = Bodies.circle(50, 0, 50, 10);
 
 // const pendulum2 = Bodies.circle(coordenadas[0]+canvasWidth * 2/3, coordenadas[0], 50, 10);
-const pendulum2 = Bodies.circle(canvasWidth - coordenadas[0], coordenadas[0], 50, 10);
+const pendulum2 = Bodies.circle(canvasWidth - coordenadas[0], coordenadas[0], canvasWidth/20, 10);
 
 // const ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true });
 
@@ -74,8 +74,8 @@ Composite.add(iEngine.world, [pendulum1, pendulum2]);
 const constraint = Matter.Constraint.create({
     bodyA: pendulum1,
     bodyB: pendulum2,
-    pointA: { x: 49, y: 0 },
-    pointB: { x:-49, y: 0 },
+    pointA: { x: (canvasWidth/20)-1, y: 0 },
+    pointB: { x:-((canvasWidth/20)-1), y: 0 },
     length: 200, // Longitud de la cuerda
     stiffness: 0.01 // Rigidez de la cuerda
 });

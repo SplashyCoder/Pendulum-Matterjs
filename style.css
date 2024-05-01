@@ -1,63 +1,87 @@
-body {
-    padding: 0;
-    margin: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
+body{
+    background-color: #000;
+}
+
+.titleContainer{
+    /* position: absolute; */
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
+    /* flex-direction: column; */
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
+    align-items: center;
+}
+
+.titleTotal{
+    color: #f9f9f9;
+    display:flex ;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 50px;
+    justify-content: center;
+    align-items: center;
+    /* position:relative; */
+}
+
+.totalContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     background: black;
+    padding: 40px;
+    /* overflow: scroll; */
 }
 
 .canvasContaier{
     width: 800px;
     height: 800px;
+    /* position: static; */
 }
 
 canvas {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     background: #0b1b35;
+    border: #f9f9f9 1px solid;
+}
+/* 
+.controlContainer{
+    position: relative;
+} */
+
+/* Estilos básicos para el formulario */
+.controlContainer{
+    /* max-width: 400px; */
+    padding: 100px;
+    margin: 0 auto; /* Centrar el formulario */
+    border: #f9f9f9 1px solid;
+    color: #f9f9f9;
+    background:  0% 0% / contain rgb(20, 21, 31);
+
 }
 
-    /* Estilos básicos para el formulario */
-    .form-container {
-        max-width: 400px;
-        margin: 0 auto; /* Centrar el formulario */
-        padding: 20px;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
-    }
+label {
+    display: block;
+    margin-bottom: 8px;
+}
 
-    label {
-        display: block;
-        margin-bottom: 8px;
-    }
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-    input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-    button {
-        padding: 10px 20px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #45a049;
-    }
+button:hover {
+    background-color: #45a049;
+}
