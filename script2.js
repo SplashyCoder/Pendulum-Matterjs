@@ -43,6 +43,14 @@ const canvasHeight = ajustarTamañoH()
 const canvasWidthPendulum1 = canvasWidth/2
 
 
+const anguloCartesiano = (anguloEnGrados) => {
+    // Convertir a radianes
+    const anguloEnRadianes = anguloEnGrados * Math.PI / 180;
+    // datosImp cartesianas del péndulo
+    const x = Math.floor(canvasWidth/3 * Math.sin(anguloEnRadianes)); // Posición horizontal
+    console.log(x)
+}
+    
 
 
 const pendulum1 = Matter.Bodies.circle(canvasWidth/3, 300, canvasWidth/20, 10); // Posición inicial
@@ -93,12 +101,13 @@ document.getElementById("penduloForm").addEventListener("submit", function (e) {
 
     // Obtener valores del formulario
     const x = parseFloat(document.getElementById("x").value);
-    const y = parseFloat(document.getElementById("y").value);
+    const newX = anguloCartesiano(x)
+    const y = 300;
 
     // Alterar las coordenadas del péndulo
-    Matter.Body.setPosition(pendulum1, { x, y });
+    Matter.Body.setPosition(pendulum1, { newX, y });
     Matter.Body.setPosition(pendulum2, { x, y });
 
 
-    console.log(`Péndulo movido a (${typeof x}, ${typeof y})`);
+    console.log(`Péndulo movido a (${newX}, ${typeof y})`);
 });
