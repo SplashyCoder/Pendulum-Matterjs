@@ -46,14 +46,12 @@ enviar.addEventListener('submit', function(event) {
   event.preventDefault(); // Prevenir el comportamiento predeterminado (como recargar la página)
   const formData = new FormData(enviar);
   const datosArray = Array.from(formData.entries()); 
-  datosImp = datosArray
+  datosImp = catchData(datosArray)
   console.log(datosImp)
   enviar.reset()
 });
 
-const hola = catchData(datosImp)
-
-console.log(hola)
+console.log(datosImp)
 
 
 
