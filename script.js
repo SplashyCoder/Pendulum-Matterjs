@@ -1,13 +1,13 @@
 
 //functions for catching the canvas limits 
 //width
-function ajustarTamañoW(){
+const ajustarTamañoW = () => {
     var panelIzquierda = document.getElementById("canvasContaienr");
     return panelIzquierda.clientWidth
 }
 
 //Heigth
-function ajustarTamañoH(){
+const ajustarTamañoH = () => {
     var panelIzquierda = document.getElementById("canvasContaienr");
     return panelIzquierda.clientHeight
 }
@@ -18,7 +18,8 @@ const canvasHeight = ajustarTamañoH()
 const canvasWidthPendulum1 = canvasWidth/2
 
 
-function anguloCartesiano (anguloEnGrados) {
+
+const anguloCartesiano = (anguloEnGrados) => {
 // Convertir a radianes
 const anguloEnRadianes = anguloEnGrados * Math.PI / 180;
 
@@ -32,10 +33,28 @@ return(coordenadas);
 }
 
 let coordenadas = anguloCartesiano(45)
-console.log(coordenadas)
 
 
-//saving it in variables
+
+let datosImp = []
+
+const catchData = (entry) => datos = [anguloCartesiano(entry[0][1]),anguloCartesiano(entry[1][1]),entry[2][1],entry[3][1]]
+
+
+var enviar = document.getElementById('penduloForm')
+enviar.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevenir el comportamiento predeterminado (como recargar la página)
+  const formData = new FormData(enviar);
+  const datosArray = Array.from(formData.entries()); 
+  datosImp = datosArray
+  console.log(datosImp)
+  enviar.reset()
+});
+
+const hola = catchData(datosImp)
+
+console.log(hola)
+
 
 
 //Creating the const for Matter js
