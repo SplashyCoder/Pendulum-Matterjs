@@ -19,40 +19,49 @@ const canvasWidthPendulum1 = canvasWidth/2
 
 
 
+let datosImp = [[188.56180831641268,100],[188.56180831641268,100],0.01,200]
+
+
 const anguloCartesiano = (anguloEnGrados) => {
-// Convertir a radianes
-const anguloEnRadianes = anguloEnGrados * Math.PI / 180;
+  // Convertir a radianes
+  const anguloEnRadianes = anguloEnGrados * Math.PI / 180;
+  
+  // datosImp cartesianas del péndulo
+  const x = canvasWidth/3 * Math.sin(anguloEnRadianes); // Posición horizontal
+  const y = 10; // Posición vertical
+  // const y = 10
+  
+  let datosImp = [x,y]
+  return(datosImp);
+  }
+  
+  
+  const catchData = (entry) =>{
+  
+    datos = [anguloCartesiano(entry[0][1]),anguloCartesiano(entry[1][1]),entry[2][1],entry[3][1]]
 
-// Coordenadas cartesianas del péndulo
-const x = canvasWidth/3 * Math.sin(anguloEnRadianes); // Posición horizontal
-const y = 10; // Posición vertical
-// const y = 10
+    let pendulum1DataX = datos[0][0]
+    let pendulum1DataY = datos[0][1]
 
-let coordenadas = [x,y]
-return(coordenadas);
-}
+    let pendulum2DataX = datos[1][0]
+    let pendulum2DataY = datos[1][1]
 
-let coordenadas = anguloCartesiano(45)
+    console.log({pendulum1DataX,pendulum1DataY})
+    Matter.Body.setPosition(pendulum1, {pendulum1DataX , pendulum1DataY })
+    Matter.Body.setPosition(pendulum2, {pendulum2DataX , pendulum2DataY })
 
-
-
-let datosImp = []
-
-const catchData = (entry) => datos = [anguloCartesiano(entry[0][1]),anguloCartesiano(entry[1][1]),entry[2][1],entry[3][1]]
-
-
-var enviar = document.getElementById('penduloForm')
-enviar.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevenir el comportamiento predeterminado (como recargar la página)
-  const formData = new FormData(enviar);
-  const datosArray = Array.from(formData.entries()); 
-  datosImp = catchData(datosArray)
+  } 
+  
+  var enviar = document.getElementById('penduloForm')
+  enviar.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(enviar);
+    const datosArray = Array.from(formData.entries()); 
+    datosImp = catchData(datosArray)
+    enviar.reset()
+  });
+  
   console.log(datosImp)
-  enviar.reset()
-});
-
-console.log(datosImp)
-
 
 
 //Creating the const for Matter js
@@ -75,11 +84,11 @@ const iRender = Render.create({
 });
 
 //Creating the bodies and the ground
-const pendulum1 = Bodies.circle(coordenadas[0], coordenadas[0], canvasWidth/20, 10);
+const pendulum1 = Bodies.circle(datosImp[0][0], datosImp[0][1], canvasWidth/20, 10);
 // const pendulum1 = Bodies.circle(50, 0, 50, 10);
 
-// const pendulum2 = Bodies.circle(coordenadas[0]+canvasWidth * 2/3, coordenadas[0], 50, 10);
-const pendulum2 = Bodies.circle(canvasWidth - coordenadas[0], coordenadas[0], canvasWidth/20, 10);
+// const pendulum2 = Bodies.circle(datosImp[0]+canvasWidth * 2/3, datosImp[0], 50, 10);
+const pendulum2 = Bodies.circle(canvasWidth - datosImp[1][0], datosImp[1][1], canvasWidth/20, 10);
 
 // const ground = Bodies.rectangle(400, 380, 810, 60, { isStatic: true });
 
@@ -93,8 +102,8 @@ const constraint = Matter.Constraint.create({
     bodyB: pendulum2,
     pointA: { x: (canvasWidth/20)-1, y: 0 },
     pointB: { x:-((canvasWidth/20)-1), y: 0 },
-    length: 200, // Longitud de la cuerda
-    stiffness: 0.01 // Rigidez de la cuerda
+    length: datosImp[3], // Longitud de la cuerda
+    stiffness: datosImp[2]// Rigidez de la cuerda
 });
 
 //Creating costraints 1 & 2 for makin the pendulums
@@ -123,3 +132,9 @@ Composite.add(iEngine.world, [constraint, constraint2, constraint3]);
 //Redering everithing
 Render.run(iRender);
 Runner.run(iRunner, iEngine);
+
+
+
+
+
+  
