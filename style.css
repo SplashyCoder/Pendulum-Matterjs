@@ -11,6 +11,28 @@ body{
     position: relative;
 }
 
+.form{
+    display: grid;
+    grid-template-rows: repeat(1fr,4);
+
+}
+.x{
+    grid-row: 1;
+}
+.Duresa{
+    grid-row: 2;
+}
+.Longitud{
+    grid-row: 3;
+}
+.Btn{
+    grid-row: 4;
+}
+
+.input{
+    grid-column: 2;
+}
+
 input, button {
     margin-bottom: 10px;
 }
