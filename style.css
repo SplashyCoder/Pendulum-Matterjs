@@ -1,7 +1,14 @@
+body{
+    background-color: black;
+}
+
 .form-container {
     border: 1px solid #ccc;
     padding: 20px;
     margin-bottom: 20px; /* Espacio para el canvas */
+    background:  0% 0% / contain rgb(20, 21, 31);
+    color: #ccc;
+    position: relative;
 }
 
 input, button {
@@ -22,5 +29,9 @@ button:hover {
 }
 
 canvas {
-    background-color: lightgray;
+    background:  0% 0% / contain rgb(20, 21, 31);
+    border: 1px solid #ccc;
+    width: 99% ;
+    /* height: 600px; */
 }
+
