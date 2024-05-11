@@ -112,9 +112,13 @@ const changeCoordanites = (x) =>{
 
 const changeContraint = (Length, stiffness) =>{
 
+    if(Length == 0 || stiffness == 0){  
+    Matter.World.remove(world, constraint);
+    }else{
+    Matter.World.add(world, constraint);
     constraint .length = Length;
     constraint .stiffness = stiffness/100;
-
+    }
 }
 // Manejador de evento para el formulari
 document.getElementById("penduloForm").addEventListener("submit", function (e) {
