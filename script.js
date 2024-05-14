@@ -117,7 +117,7 @@ const changeContraint = (Length, stiffness) =>{
     }else{
     Matter.World.add(world, constraint);
     constraint .length = Length;
-    constraint .stiffness = stiffness/100;
+    constraint .stiffness = stiffness/1000;
     }
 }
 // Manejador de evento para el formulari
